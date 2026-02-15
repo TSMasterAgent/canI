@@ -1,0 +1,20 @@
+{
+  "name": "cani-backend",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "api-gateway",
+    "auth-service",
+    "project-service",
+    "orchestrator-service",
+    "ai-service",
+    "execution-service",
+    "reporting-service",
+    "common"
+  ],
+  "scripts": {
+    "start:dev": "npm run start:dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}
