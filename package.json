@@ -1,0 +1,12 @@
+{
+  "name": "cani-e2e",
+  "version": "1.0.0",
+  "description": "End-to-End test suite for canI platform",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.0"
+  }
+}
