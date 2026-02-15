@@ -21,7 +21,7 @@
 - [x] Setup RabbitMQ and Common Library for Microservices
 
 ## Phase 2: AI & Orchestration
-- [ ] Implement AI Intelligence Service (Gemini SDK, MongoDB)
+- [x] Implement AI Intelligence Service (Gemini SDK, MongoDB)
 - [ ] Implement Orchestrator Service (State Machine, RabbitMQ)
 
 ## Phase 3: Execution & Reporting
@@ -29,7 +29,7 @@
 - [ ] Implement Reporting & Logging Service (MongoDB)
 
 ## Phase 4: Frontend Development
-- [ ] Setup React Dashboard (Vite, Tailwind, MUI)
+- [x] Setup React Dashboard (Vite, Tailwind, MUI)
 - [ ] Implement Project Management UI
 - [ ] Implement Analysis & Approval UI
 - [ ] Implement Execution Monitoring & Reporting UI
