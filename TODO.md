@@ -15,10 +15,10 @@
 - [x] Initiate GitHub repository and push initial files
 
 ## Phase 1: Core Backend Services
-- [ ] Implement Auth Service (PostgreSQL, TypeORM, JWT)
-- [ ] Implement API Gateway (Routing, JWT Validation, Rate Limiting)
-- [ ] Implement Project Service (PostgreSQL, TypeORM)
-- [ ] Setup RabbitMQ and Common Library for Microservices
+- [x] Implement Auth Service (PostgreSQL, TypeORM, JWT)
+- [x] Implement API Gateway (Routing, JWT Validation, Rate Limiting)
+- [x] Implement Project Service (PostgreSQL, TypeORM)
+- [x] Setup RabbitMQ and Common Library for Microservices
 
 ## Phase 2: AI & Orchestration
 - [ ] Implement AI Intelligence Service (Gemini SDK, MongoDB)
