@@ -88,4 +88,23 @@ export class ProjectsService {
   async getProjectLogs(projectId: string): Promise<ProjectLog[]> {
     return this.projectLogModel.find({ project_id: projectId }).sort({ timestamp: 1 }).exec();
   }
+
+  async updateStatus(projectId: string, status: any): Promise<Project> {
+    const project = await this.projectsRepository.findOne({ where: { id: projectId } });
+    if (!project) throw new Error('Project not found');
+    project.status = status;
+    return this.projectsRepository.save(project);
+  }
+
+  async saveTestCases(projectId: string, testCasesData: any[]): Promise<TestCase[]> {
+    const project = await this.projectsRepository.findOne({ where: { id: projectId } });
+    if (!project) throw new Error('Project not found');
+    
+    const testCases = testCasesData.map(tcData => {
+      const tc = this.testCasesRepository.create({ ...tcData, project });
+      return tc;
+    });
+    
+    return this.testCasesRepository.save(testCases);
+  }
 }

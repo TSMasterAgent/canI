@@ -9,6 +9,7 @@ import { IngestedDocument, IngestedDocumentSchema } from '../entities/ingested-d
 import { ProjectLog, ProjectLogSchema } from '../entities/project-log.schema';
 import { ProjectsService } from './projects.service';
 import { ProjectsController } from './projects.controller';
+import { ProjectsEventController } from './projects-event.controller';
 
 @Module({
   imports: [
@@ -32,6 +33,6 @@ import { ProjectsController } from './projects.controller';
     ]),
   ],
   providers: [ProjectsService],
-  controllers: [ProjectsController],
+  controllers: [ProjectsController, ProjectsEventController],
 })
 export class ProjectsModule {}

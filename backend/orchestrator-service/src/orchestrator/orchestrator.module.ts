@@ -28,6 +28,28 @@ import { OrchestratorController } from './orchestrator.controller';
           },
         },
       },
+      {
+        name: 'PROJECT_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [process.env.RABBITMQ_URL || 'amqp://localhost:5673'],
+          queue: 'project_queue',
+          queueOptions: {
+            durable: false,
+          },
+        },
+      },
+      {
+        name: 'REPORTING_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [process.env.RABBITMQ_URL || 'amqp://localhost:5673'],
+          queue: 'reporting_queue',
+          queueOptions: {
+            durable: false,
+          },
+        },
+      },
     ]),
   ],
   providers: [OrchestratorService],

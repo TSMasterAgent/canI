@@ -14,7 +14,10 @@ export class AiService {
     private configService: ConfigService,
     @Inject('ORCHESTRATOR_SERVICE') private orchestratorClient: ClientProxy,
   ) {
-    const apiKey = this.configService.get<string>('GEMINI_API_KEY') || 'YOUR_GEMINI_API_KEY';
+    const apiKey = this.configService.get<string>('GEMINI_API_KEY');
+    if (!apiKey) {
+      throw new Error('GEMINI_API_KEY is not defined in environment');
+    }
     this.genAI = new GoogleGenerativeAI(apiKey);
     this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
   }

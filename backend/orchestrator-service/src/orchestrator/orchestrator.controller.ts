@@ -20,4 +20,9 @@ export class OrchestratorController {
   async handleExecutionCompleted(@Payload() data: any) {
     return this.orchestratorService.handleExecutionCompleted(data);
   }
+
+  @EventPattern('execute_tests')
+  async handleExecuteTests(@Payload() data: { projectId: string; testCaseIds: string[] }) {
+    return this.orchestratorService.startExecution(data.projectId, data.testCaseIds);
+  }
 }
