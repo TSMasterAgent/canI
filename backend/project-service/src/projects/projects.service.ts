@@ -8,6 +8,7 @@ import { Project } from '../entities/project.entity';
 import { TargetCredential } from '../entities/target-credential.entity';
 import { TestCase } from '../entities/test-case.entity';
 import { IngestedDocument, IngestedDocumentDocument } from '../entities/ingested-document.schema';
+import { ProjectLog, ProjectLogDocument } from '../entities/project-log.schema';
 
 @Injectable()
 export class ProjectsService {
@@ -20,6 +21,8 @@ export class ProjectsService {
     private testCasesRepository: Repository<TestCase>,
     @InjectModel(IngestedDocument.name)
     private ingestedDocumentModel: Model<IngestedDocumentDocument>,
+    @InjectModel(ProjectLog.name)
+    private projectLogModel: Model<ProjectLogDocument>,
     @Inject('ORCHESTRATOR_SERVICE') private orchestratorClient: ClientProxy,
   ) {}
 
@@ -56,5 +59,33 @@ export class ProjectsService {
 
   async getTestCases(projectId: string): Promise<TestCase[]> {
     return this.testCasesRepository.find({ where: { project: { id: projectId } } });
+  }
+
+  async updateTestCaseStatus(testCaseId: string, status: any): Promise<TestCase> {
+    const testCase = await this.testCasesRepository.findOne({ where: { id: testCaseId } });
+    if (!testCase) throw new Error('Test case not found');
+    testCase.status = status;
+    return this.testCasesRepository.save(testCase);
+  }
+
+  async executeProject(projectId: string): Promise<any> {
+    const testCases = await this.testCasesRepository.find({
+      where: { project: { id: projectId }, status: 'APPROVED' as any },
+    });
+    
+    if (testCases.length === 0) {
+      throw new Error('No approved test cases found');
+    }
+
+    this.orchestratorClient.emit('execute_tests', {
+      projectId,
+      testCaseIds: testCases.map(tc => tc.id),
+    });
+
+    return { message: 'Execution started', testCaseCount: testCases.length };
+  }
+
+  async getProjectLogs(projectId: string): Promise<ProjectLog[]> {
+    return this.projectLogModel.find({ project_id: projectId }).sort({ timestamp: 1 }).exec();
   }
 }

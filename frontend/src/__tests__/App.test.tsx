@@ -12,5 +12,7 @@ describe('App', () => {
       </ThemeProvider>
     );
     expect(screen.getByText(/canI Dashboard/i)).toBeInTheDocument();
+    expect(screen.getByText(/Projects/i)).toBeInTheDocument();
+    expect(screen.getByText(/Create New Project/i)).toBeInTheDocument();
   });
 });

@@ -13,12 +13,7 @@ export class ProxyController {
   @UseGuards(JwtAuthGuard)
   @All('projects*')
   async proxyProjects(@Req() req: express.Request, @Res() res: express.Response) {
-    return (proxy as any)('localhost:3002')(req, res);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @All('test-cases*')
-  async proxyTestCases(@Req() req: express.Request, @Res() res: express.Response) {
+    // Both /projects and /projects/test-cases go to projects service
     return (proxy as any)('localhost:3002')(req, res);
   }
 }

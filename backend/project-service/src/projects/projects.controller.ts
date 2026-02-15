@@ -34,4 +34,22 @@ export class ProjectsController {
   async getTestCases(@Param('id') id: string) {
     return this.projectsService.getTestCases(id);
   }
+
+  @Post('test-cases/:testCaseId/status')
+  async updateTestCaseStatus(
+    @Param('testCaseId') testCaseId: string,
+    @Body('status') status: string,
+  ) {
+    return this.projectsService.updateTestCaseStatus(testCaseId, status);
+  }
+
+  @Post(':id/execute')
+  async executeProject(@Param('id') id: string) {
+    return this.projectsService.executeProject(id);
+  }
+
+  @Get(':id/logs')
+  async getProjectLogs(@Param('id') id: string) {
+    return this.projectsService.getProjectLogs(id);
+  }
 }

@@ -6,13 +6,17 @@ import { Project } from '../entities/project.entity';
 import { TargetCredential } from '../entities/target-credential.entity';
 import { TestCase } from '../entities/test-case.entity';
 import { IngestedDocument, IngestedDocumentSchema } from '../entities/ingested-document.schema';
+import { ProjectLog, ProjectLogSchema } from '../entities/project-log.schema';
 import { ProjectsService } from './projects.service';
 import { ProjectsController } from './projects.controller';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Project, TargetCredential, TestCase]),
-    MongooseModule.forFeature([{ name: IngestedDocument.name, schema: IngestedDocumentSchema }]),
+    MongooseModule.forFeature([
+      { name: IngestedDocument.name, schema: IngestedDocumentSchema },
+      { name: ProjectLog.name, schema: ProjectLogSchema },
+    ]),
     ClientsModule.register([
       {
         name: 'ORCHESTRATOR_SERVICE',
