@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 export type ExecutionLogDocument = ExecutionLog & Document;
 
-@Schema()
+@Schema({ collection: 'executionlogs' })
 export class ExecutionLog {
   @Prop({ required: true })
   test_case_id: string;
@@ -19,9 +19,6 @@ export class ExecutionLog {
 
   @Prop({ type: Object })
   response_data: any;
-
-  @Prop()
-  screenshot_path: string;
 
   @Prop({ required: true, enum: ['INFO', 'ERROR'] })
   log_level: string;
